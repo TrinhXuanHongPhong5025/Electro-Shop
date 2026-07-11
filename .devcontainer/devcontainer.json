@@ -1,11 +1,15 @@
 {
-  "name": "Laravel PHP 8.2",
-  "image": "mcr.microsoft.com/devcontainers/php:8.2",
+  "name": "Laravel",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
   "features": {
+    "ghcr.io/devcontainers/features/php:1": {
+      "version": "8.2"
+    },
     "ghcr.io/devcontainers/features/node:1": {
       "version": "20"
     },
     "ghcr.io/devcontainers/features/composer:1": {}
   },
-  "forwardPorts": [8000, 5173]
+  "forwardPorts": [8000, 5173],
+  "postCreateCommand": "composer --version && php -v && node -v"
 }
