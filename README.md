@@ -1,20 +1,22 @@
+# ElectroShop - Hướng dẫn cài đặt và chạy dự án
 
-# ElectroShop - Hướng dẫn cài đặt và chạy dự án Laravel trên XAMPP
+## Giới thiệu
 
-## 1. Yêu cầu hệ thống
-
-- Windows
-- XAMPP (Apache + MySQL)
-- PHP 8.2 trở lên
-- Laravel 10
-- Visual Studio Code
-- Trình duyệt (Chrome, Edge,...)
-
-> Lưu ý: Nếu dự án đã có thư mục `vendor` thì không cần cài Composer để chạy.
+ElectroShop là một website bán hàng được phát triển bằng **Laravel 10** và sử dụng **MySQL/MariaDB** làm hệ quản trị cơ sở dữ liệu.
 
 ---
 
-# 2. Giải nén dự án
+# Yêu cầu hệ thống
+
+- Windows 10/11
+- XAMPP (Apache + MySQL)
+- PHP 8.2 hoặc mới hơn
+- Visual Studio Code
+- Composer (khuyến nghị)
+
+---
+
+# Bước 1. Giải nén dự án
 
 Giải nén file:
 
@@ -22,45 +24,30 @@ Giải nén file:
 electroshop.rar
 ```
 
-Copy thư mục dự án vào:
+Sau khi giải nén sẽ thu được thư mục dự án.
+
+Copy toàn bộ thư mục vào:
 
 ```
 C:\xampp\htdocs\
-```
-
-Sau khi giải nén, cấu trúc sẽ như sau (tùy theo thư mục nén):
-
-```
-C:\xampp\htdocs\
-└── electroshop
-    └── electroshop
-        └── electroshop
-            ├── app
-            ├── bootstrap
-            ├── config
-            ├── database
-            ├── public
-            ├── resources
-            ├── routes
-            ├── storage
-            ├── vendor
-            ├── artisan
-            ├── composer.json
-            ├── .env
-            └── ecletroshop.sql
-```
-
-Thư mục gốc của Laravel là nơi có file:
-
-```
-artisan
 ```
 
 ---
 
-# 3. Mở dự án bằng VS Code
+# Bước 2. Mở dự án
 
-Mở đúng thư mục Laravel:
+Mở Visual Studio Code.
+
+Chọn:
+
+```
+File
+→ Open Folder
+```
+
+Mở **đúng thư mục Laravel** (thư mục chứa file `artisan`).
+
+Ví dụ:
 
 ```
 C:\xampp\htdocs\electroshop\electroshop\electroshop
@@ -72,36 +59,40 @@ Kiểm tra bằng Terminal:
 dir
 ```
 
-Phải thấy:
+Nếu thấy các file sau là đúng thư mục:
 
 ```
 artisan
 composer.json
 vendor
+app
+bootstrap
+config
+database
+public
+resources
 routes
 storage
-public
-...
 ```
 
 ---
 
-# 4. Khởi động XAMPP
+# Bước 3. Khởi động XAMPP
 
-Mở XAMPP Control Panel.
+Mở **XAMPP Control Panel**.
 
-Khởi động:
+Start:
 
 - Apache
 - MySQL
 
-Nếu MySQL sử dụng cổng khác mặc định (ví dụ 3307) thì cần chỉnh lại file `.env`.
-
 ---
 
-# 5. Tạo Database
+# Bước 4. Tạo Database
 
-Mở trình duyệt:
+Mở trình duyệt.
+
+Truy cập:
 
 ```
 http://localhost/phpmyadmin
@@ -113,27 +104,27 @@ Chọn:
 New
 ```
 
-Tạo database:
+Nhập tên database:
 
 ```
 ecletroshop
+```
+
+Sau đó nhấn:
+
+```
+Create
 ```
 
 ---
 
-# 6. Import Database
+# Bước 5. Import Database
 
-Chọn database:
+Trong phpMyAdmin:
 
-```
-ecletroshop
-```
-
-Chọn tab:
-
-```
-Import
-```
+- Chọn database **ecletroshop**
+- Chọn tab **Import**
+- Nhấn **Choose File**
 
 Chọn file:
 
@@ -141,19 +132,23 @@ Chọn file:
 ecletroshop.sql
 ```
 
-trong thư mục dự án.
+(file nằm trong thư mục dự án)
 
-Sau đó nhấn:
+Nhấn:
 
 ```
 Import
 ```
 
-Nếu thành công sẽ xuất hiện thông báo màu xanh.
+Đợi đến khi xuất hiện thông báo:
+
+```
+Import has been successfully finished.
+```
 
 ---
 
-# 7. Cấu hình file .env
+# Bước 6. Cấu hình file .env
 
 Mở file:
 
@@ -161,44 +156,44 @@ Mở file:
 .env
 ```
 
-Sửa cấu hình database:
+Kiểm tra thông tin kết nối cơ sở dữ liệu:
 
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
-DB_PORT=3307
+DB_PORT=3306
 DB_DATABASE=ecletroshop
 DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-> Lưu ý:
-
-Nếu MySQL của XAMPP chạy ở cổng mặc định thì dùng:
-
-```env
-DB_PORT=3306
-```
-
-Nếu MySQL chạy ở:
-
-```
-3307
-```
-
-thì phải sửa:
-
-```env
-DB_PORT=3307
-```
-
-Có thể kiểm tra cổng MySQL trong XAMPP Control Panel.
+> **Lưu ý**
+>
+> Nếu MySQL trên máy không sử dụng cổng mặc định (`3306`) thì thay đổi:
+>
+> ```env
+> DB_PORT=3307
+> ```
+>
+> hoặc cổng tương ứng với máy đang sử dụng.
 
 ---
 
-# 8. Xóa cache cấu hình
+# Bước 7. Cài đặt thư viện
 
-Mở Terminal tại thư mục dự án:
+Nếu thư mục **vendor** chưa có:
+
+```bash
+composer install
+```
+
+Nếu đã có thư mục **vendor** thì có thể bỏ qua bước này.
+
+---
+
+# Bước 8. Xóa cache cấu hình
+
+Chạy:
 
 ```bash
 php artisan optimize:clear
@@ -206,9 +201,9 @@ php artisan optimize:clear
 
 ---
 
-# 9. Chạy dự án
+# Bước 9. Chạy dự án
 
-Chạy:
+Trong Terminal:
 
 ```bash
 php artisan serve
@@ -228,72 +223,12 @@ http://127.0.0.1:8000
 
 ---
 
-# 10. Kiểm tra phiên bản
+# Một số lỗi thường gặp
 
-Kiểm tra PHP:
-
-```bash
-php -v
-```
-
-Kiểm tra Laravel:
-
-```bash
-php artisan --version
-```
-
----
-
-# 11. Một số lỗi thường gặp
-
-## Lỗi
+## 1. Unknown database
 
 ```
-SQLSTATE[HY000] [1045]
-Access denied for user 'root'@'localhost'
-```
-
-### Nguyên nhân
-
-Sai cấu hình Database trong file `.env`.
-
-### Cách khắc phục
-
-Kiểm tra:
-
-```env
-DB_HOST
-DB_PORT
-DB_DATABASE
-DB_USERNAME
-DB_PASSWORD
-```
-
-Đặc biệt:
-
-```
-DB_PORT
-```
-
-phải đúng với cổng MySQL của XAMPP.
-
-Sau đó chạy:
-
-```bash
-php artisan optimize:clear
-```
-
-và chạy lại:
-
-```bash
-php artisan serve
-```
-
----
-
-## Lỗi
-
-```
+SQLSTATE[HY000] [1049]
 Unknown database 'ecletroshop'
 ```
 
@@ -301,7 +236,7 @@ Unknown database 'ecletroshop'
 
 Chưa tạo hoặc chưa import database.
 
-### Cách khắc phục
+### Khắc phục
 
 - Tạo database:
 
@@ -317,27 +252,82 @@ ecletroshop.sql
 
 ---
 
-## Lỗi
+## 2. Access denied
 
 ```
-composer is not recognized
+SQLSTATE[HY000] [1045]
+Access denied for user 'root'@'localhost'
 ```
 
 ### Nguyên nhân
 
-Chưa cài Composer.
+Sai thông tin kết nối MySQL.
 
-### Khắc phục
+### Kiểm tra
 
-Tải Composer:
+File `.env`
 
-https://getcomposer.org/download/
+```env
+DB_HOST
+DB_PORT
+DB_DATABASE
+DB_USERNAME
+DB_PASSWORD
+```
+
+Nếu MySQL sử dụng cổng khác 3306 thì sửa:
+
+```env
+DB_PORT=<cổng MySQL>
+```
+
+Sau đó chạy:
+
+```bash
+php artisan optimize:clear
+```
+
+và chạy lại:
+
+```bash
+php artisan serve
+```
 
 ---
 
-# 12. Dừng Server
+## 3. composer không được nhận
 
-Trong Terminal:
+```
+composer : The term 'composer' is not recognized
+```
+
+### Khắc phục
+
+Cài Composer:
+
+https://getcomposer.org/download/
+
+Sau đó kiểm tra:
+
+```bash
+composer -V
+```
+
+---
+
+## 4. Thiếu thư mục vendor
+
+Chạy:
+
+```bash
+composer install
+```
+
+---
+
+# Dừng server
+
+Nhấn:
 
 ```
 Ctrl + C
@@ -345,36 +335,28 @@ Ctrl + C
 
 ---
 
-# 13. Thông tin dự án
+# Công nghệ sử dụng
 
-Framework:
-
-- Laravel 10.37.3
-
-PHP:
-
-- 8.2.12
-
-Database:
-
-- MariaDB / MySQL
-
-Web Server:
-
-- Apache (XAMPP)
+- Laravel 10
+- PHP 8.2
+- MySQL / MariaDB
+- Bootstrap
+- Blade Template
+- XAMPP
 
 ---
 
-# 14. Quy trình chạy nhanh
+# Quy trình chạy dự án
 
-```text
-Giải nén project
+```
+Giải nén file .rar
         │
         ▼
 Copy vào htdocs
         │
         ▼
-Mở VS Code
+Mở đúng thư mục Laravel
+(thư mục chứa artisan)
         │
         ▼
 Start Apache + MySQL
@@ -386,8 +368,7 @@ Tạo database ecletroshop
 Import ecletroshop.sql
         │
         ▼
-Chỉnh file .env
-(DB_PORT đúng với MySQL)
+Kiểm tra file .env
         │
         ▼
 php artisan optimize:clear
@@ -398,22 +379,3 @@ php artisan serve
         ▼
 Mở http://127.0.0.1:8000
 ```
-
----
-
-# 15. Ghi chú
-
-- Đảm bảo thư mục `vendor` đã tồn tại.
-- Nếu thiếu thư mục `vendor`, cài Composer và chạy:
-
-```bash
-composer install
-```
-
-- Nếu thay đổi cấu hình `.env`, luôn chạy:
-
-```bash
-php artisan optimize:clear
-```
-
-để Laravel cập nhật cấu hình mới.
